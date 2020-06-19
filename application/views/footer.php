@@ -5,55 +5,19 @@
                         have to say</h2><!-- /.block-title__title -->
                 </div><!-- /.block-title -->
                 <div class="testimonials-one__carousel owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="testimonials-one__single">
-                            <div class="testimonials-one__qoute">
-                                <img src="<?=base_url()?>assets/images/qoute-1-1.png" alt="">
-                            </div><!-- /.testimonials-one__qoute -->
-                            <p class="testimonials-one__text">There are many variations of passages of lore ipsu available but
-                                the majority.</p><!-- /.testimonials-one__text -->
-                            <img src="<?=base_url()?>assets/images/team-1-1.jpg" alt="" class="testimonials-one__img">
-                            <h3 class="testimonials-one__name">Anne Hall</h3><!-- /.testimonials-one__name -->
-                            <p class="testimonials-one__designation">Student</p><!-- /.testimonials-one__designation -->
-                        </div><!-- /.testimonials-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="testimonials-one__single">
-                            <div class="testimonials-one__qoute">
-                                <img src="<?=base_url()?>assets/images/qoute-1-1.png" alt="">
-                            </div><!-- /.testimonials-one__qoute -->
-                            <p class="testimonials-one__text">There are many variations of passages of lore ipsu available but
-                                the majority have suffered alteration in some form.</p><!-- /.testimonials-one__text -->
-                            <img src="<?=base_url()?>assets/images/team-1-2.jpg" alt="" class="testimonials-one__img">
-                            <h3 class="testimonials-one__name">Andre Obrien</h3><!-- /.testimonials-one__name -->
-                            <p class="testimonials-one__designation">Student</p><!-- /.testimonials-one__designation -->
-                        </div><!-- /.testimonials-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="testimonials-one__single">
-                            <div class="testimonials-one__qoute">
-                                <img src="<?=base_url()?>assets/images/qoute-1-1.png" alt="">
-                            </div><!-- /.testimonials-one__qoute -->
-                            <p class="testimonials-one__text">There are many variations of passages of lore ipsu available but
-                                the majority have suffered alteration in some form, by injected humour.</p>
-                            <!-- /.testimonials-one__text -->
-                            <img src="<?=base_url()?>assets/images/team-1-3.jpg" alt="" class="testimonials-one__img">
-                            <h3 class="testimonials-one__name">Shane Vasquez</h3><!-- /.testimonials-one__name -->
-                            <p class="testimonials-one__designation">Student</p><!-- /.testimonials-one__designation -->
-                        </div><!-- /.testimonials-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="testimonials-one__single">
-                            <div class="testimonials-one__qoute">
-                                <img src="<?=base_url()?>assets/images/qoute-1-1.png" alt="">
-                            </div><!-- /.testimonials-one__qoute -->
-                            <p class="testimonials-one__text">There are many variations of passages of lore ipsu available but
-                                the majority.</p><!-- /.testimonials-one__text -->
-                            <img src="<?=base_url()?>assets/images/team-1-4.jpg" alt="" class="testimonials-one__img">
-                            <h3 class="testimonials-one__name">Maud Lee</h3><!-- /.testimonials-one__name -->
-                            <p class="testimonials-one__designation">Student</p><!-- /.testimonials-one__designation -->
-                        </div><!-- /.testimonials-one__single -->
-                    </div><!-- /.item -->
+                    <?php foreach($feedbacks as $f){?>
+                        <div class="item">
+                            <div class="testimonials-one__single">
+                                <div class="testimonials-one__qoute">
+                                    <img src="<?=base_url()?>assets/images/qoute-1-1.png" alt="">
+                                </div>
+                                <p class="testimonials-one__text"><?=$f->content?></p>
+                                <img src="<?=base_url()?>assets/images/<?=$f->img_src?>" alt="" class="testimonials-one__img">
+                                <h3 class="testimonials-one__name"><?=$f->name?></h3>
+                                <p class="testimonials-one__designation">Student</p>
+                            </div><!-- /.testimonials-one__single -->
+                        </div><!-- /.item -->
+                    <?php }?>
                 </div><!-- /.testimonials-one__carousel owl-carousel owl-theme -->
             </div><!-- /.container -->
         </section><!-- /.testimonials-one -->
@@ -159,12 +123,9 @@
                             <div class="footer-widget footer-widget__gallery">
                                 <h2 class="footer-widget__title">Gallery</h2><!-- /.footer-widget__title -->
                                 <ul class="list-unstyled footer-widget__gallery-list">
-                                    <li><a href="#"><img src="<?=base_url()?>assets/images/footer-1-1.png" alt=""></a></li>
-                                    <li><a href="#"><img src="<?=base_url()?>assets/images/footer-1-2.png" alt=""></a></li>
-                                    <li><a href="#"><img src="<?=base_url()?>assets/images/footer-1-3.png" alt=""></a></li>
-                                    <li><a href="#"><img src="<?=base_url()?>assets/images/footer-1-4.png" alt=""></a></li>
-                                    <li><a href="#"><img src="<?=base_url()?>assets/images/footer-1-5.png" alt=""></a></li>
-                                    <li><a href="#"><img src="<?=base_url()?>assets/images/footer-1-6.png" alt=""></a></li>
+                                    <?php foreach($gallery as $g){?>
+                                    <li><a href="<?=base_url('assets/images/').$g->img_src?>" class="spotlight"><img src="<?=base_url('assets/images/').$g->img_src?>" alt=""></a></li>
+                                    <?php }?>
                                 </ul><!-- /.footer-widget__gallery -->
                             </div><!-- /.footer-widget -->
                         </div><!-- /.col-lg-3 -->
@@ -227,6 +188,7 @@
     <script src="<?=base_url()?>assets/js/vegas.min.js"></script>
     <script src="<?=base_url()?>assets/js/jquery.validate.min.js"></script>
     <script src="<?=base_url()?>assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="<?=base_url()?>assets/js/spotlight.bundle.js"></script>
 
     <!-- template scripts -->
     <script src="<?=base_url()?>assets/js/theme.js"></script>
