@@ -38,6 +38,25 @@ class GetModel extends CI_Model{
                         ->result();
     }
     
+    public function getCourses()
+    {
+        $this->db->select('*')
+                ->from('courses c')
+                ->order_by('id','desc')
+                ->join('categories ca', 'c.cat_id = ca.cat_id', 'LEFT');
+        return $this->db->get()->result();
+    }
+
+    public function getCoursesLim()
+    {
+        $this->db->select('*')
+                ->from('courses c')
+                ->order_by('id','desc')
+                ->limit(6)
+                ->join('categories ca', 'c.cat_id = ca.cat_id', 'LEFT');
+        return $this->db->get()->result();
+    }
+    
     // Fetch Enquiries
     public function getEnquiries()
     {

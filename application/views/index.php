@@ -1,42 +1,19 @@
 
         <div class="banner-wrapper">
             <section class="banner-two banner-carousel__one no-dots owl-theme owl-carousel">
-                <div class="banner-two__slide banner-two__slide-one" style="background-image: url(assets/images/ad5.jpg);">
-                    <div class="container">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12">
-                                <p class="banner-two__tag-line">High quality courses</p><!-- /.banner-two__tag-line -->
-                                <h3 class="banner-two__title banner-two__light-color">Read & learn <br>
-                                    in an easy way</h3><!-- /.banner-two__title -->
-                                <a href="#" class="thm-btn banner-two__btn">Learn More</a>
-                            </div><!-- /.col-xl-12 -->
-                        </div><!-- /.row -->
-                    </div><!-- /.container -->
-                </div><!-- /.banner-two__slide -->
-                <div class="banner-two__slide banner-two__slide-two" style="background-image: url(assets/images/ad2.png);">
-                    <div class="container">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12">
-                                <p class="banner-two__tag-line">High quality courses</p><!-- /.banner-two__tag-line -->
-                                <h3 class="banner-two__title banner-two__light-color">Read & learn <br>
-                                    in an easy way</h3><!-- /.banner-two__title -->
-                                <a href="#" class="thm-btn banner-two__btn">Learn More</a>
-                            </div><!-- /.col-xl-12 -->
-                        </div><!-- /.row -->
-                    </div><!-- /.container -->
-                </div><!-- /.banner-two__slide -->
-                <div class="banner-two__slide banner-two__slide-two" style="background-image: url(assets/images/ad1.jpg);">
-                    <div class="container">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12">
-                                <p class="banner-two__tag-line">High quality courses</p><!-- /.banner-two__tag-line -->
-                                <h3 class="banner-two__title banner-two__light-color">Read & learn <br>
-                                    in an easy way</h3><!-- /.banner-two__title -->
-                                <a href="#" class="thm-btn banner-two__btn">Learn More</a>
-                            </div><!-- /.col-xl-12 -->
-                        </div><!-- /.row -->
-                    </div><!-- /.container -->
-                </div><!-- /.banner-two__slide -->
+                <?php foreach($banners as $b){?>
+                    <div class="banner-two__slide banner-two__slide-one" style="background-image: url(<?=base_url()?>assets/images/<?=$b->img_src?>);">
+                        <div class="container">
+                            <div class="row no-gutters">
+                                <div class="col-xl-12">
+                                    <p class="banner-two__tag-line"><?=$b->tagline?></p><!-- /.banner-two__tag-line -->
+                                    <h3 class="banner-two__title banner-two__light-color"><?=$b->head?></h3><!-- /.banner-two__title -->
+                                    <a href="#" class="thm-btn banner-two__btn">Learn More</a>
+                                </div><!-- /.col-xl-12 -->
+                            </div><!-- /.row -->
+                        </div><!-- /.container -->
+                    </div><!-- /.banner-two__slide -->
+                <?php }?>
             </section><!-- /.banner-two -->
             <div class="banner-carousel-btn">
                 <a href="#" class="banner-carousel-btn__left-btn"><i class="kipso-icon-left-arrow"></i></a>
@@ -48,96 +25,17 @@
                 <div class="inner-container">
 
                     <div class="course-category-one__carousel owl-carousel owl-theme">
+                        <?php foreach($categories as $cat){?>
                         <div class="item">
-                            <div class="course-category-one__single color-1">
+                            <div class="course-category-one__single <?=$cat->cat_color?>">
                                 <div class="course-category-one__icon">
-                                    <i class="fa fa-desktop"></i><!-- /.kipso-icon-camera -->
+                                    <i class="<?=$cat->cat_img_src?>"></i><!-- /.kipso-icon-camera -->
                                 </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#">IT & Software</a></h3>
+                                <h3 class="course-category-one__title"><a href="#"><?=$cat->cat_name?></a></h3>
                                 <!-- /.course-category-one__title -->
                             </div><!-- /.course-category-one__single -->
                         </div><!-- /.item -->
-                        <div class="item">
-                            <div class="course-category-one__single color-2">
-                                <div class="course-category-one__icon">
-                                    <i class="kipso-icon-web-programming"></i><!-- /.kipso-icon-camera -->
-                                </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#">Development</a></h3>
-                                <!-- /.course-category-one__title -->
-                            </div><!-- /.course-category-one__single -->
-                        </div><!-- /.item -->
-                        <div class="item">
-                            <div class="course-category-one__single color-3">
-                                <div class="course-category-one__icon">
-                                    <i class="kipso-icon-music-player"></i><!-- /.kipso-icon-camera -->
-                                </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#">Music</a></h3>
-                                <!-- /.course-category-one__title -->
-                            </div><!-- /.course-category-one__single -->
-                        </div><!-- /.item -->
-                        <div class="item">
-                            <div class="course-category-one__single color-4">
-                                <div class="course-category-one__icon">
-                                    <i class="kipso-icon-camera"></i><!-- /.kipso-icon-camera -->
-                                </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#">Photography</a></h3>
-                                <!-- /.course-category-one__title -->
-                            </div><!-- /.course-category-one__single -->
-                        </div><!-- /.item -->
-                        <div class="item">
-                            <div class="course-category-one__single color-5">
-                                <div class="course-category-one__icon">
-                                    <i class="kipso-icon-targeting"></i><!-- /.kipso-icon-camera -->
-                                </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#">Marketing</a></h3>
-                                <!-- /.course-category-one__title -->
-                            </div><!-- /.course-category-one__single -->
-                        </div><!-- /.item -->
-                        <div class="item">
-                            <div class="course-category-one__single color-6">
-                                <div class="course-category-one__icon">
-                                    <i class="kipso-icon-health"></i><!-- /.kipso-icon-camera -->
-                                </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#">Health & Fitness</a></h3>
-                                <!-- /.course-category-one__title -->
-                            </div><!-- /.course-category-one__single -->
-                        </div><!-- /.item -->
-                        <div class="item">
-                            <div class="course-category-one__single color-1">
-                                <div class="course-category-one__icon">
-                                    <i class="kipso-icon-desktop"></i><!-- /.kipso-icon-camera -->
-                                </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#">IT & Software</a></h3>
-                                <!-- /.course-category-one__title -->
-                            </div><!-- /.course-category-one__single -->
-                        </div><!-- /.item -->
-                        <div class="item">
-                            <div class="course-category-one__single color-2">
-                                <div class="course-category-one__icon">
-                                    <i class="kipso-icon-web-programming"></i><!-- /.kipso-icon-camera -->
-                                </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#">Development</a></h3>
-                                <!-- /.course-category-one__title -->
-                            </div><!-- /.course-category-one__single -->
-                        </div><!-- /.item -->
-                        <div class="item">
-                            <div class="course-category-one__single color-3">
-                                <div class="course-category-one__icon">
-                                    <i class="kipso-icon-music-player"></i><!-- /.kipso-icon-camera -->
-                                </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#">Music</a></h3>
-                                <!-- /.course-category-one__title -->
-                            </div><!-- /.course-category-one__single -->
-                        </div><!-- /.item -->
-                        <div class="item">
-                            <div class="course-category-one__single color-4">
-                                <div class="course-category-one__icon">
-                                    <i class="kipso-icon-camera"></i><!-- /.kipso-icon-camera -->
-                                </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#">Photography</a></h3>
-                                <!-- /.course-category-one__title -->
-                            </div><!-- /.course-category-one__single -->
-                        </div><!-- /.item -->
+                        <?php }?>
                     </div><!-- /.course-category-one__carousel owl-carousel owl-theme -->
                 </div><!-- /.inner-container -->
             </div><!-- /.container -->
@@ -199,66 +97,38 @@
         <section class="course-one course-one__teacher-details home-one">
             <div class="container">
                 <div class="course-one__carousel owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="course-one__single color-1">
-                            <div class="course-one__image">
-                                <img src="assets/images/course-1-1.jpg" alt="">
-                                <!-- <i class="far fa-heart"></i> -->
-                            </div><!-- /.course-one__image -->
-                            <div class="course-one__content">
-                                <a href="#" class="course-one__category">development</a><!-- /.course-one__category -->
-                                <h2 class="course-one__title"><a href="course-details.html">New react bootcamp</a></h2>
-                                <!-- /.course-one__title -->
-                                <div class="course-one__stars">
-                                    <span class="course-one__stars-wrap">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.course-one__stars-wrap -->
-                                    <span class="course-one__count">4.8</span>
-                                    <!-- <span class="course-one__stars-count">250</span> -->
-                                </div><!-- /.course-one__stars -->
-                                <div class="course-one__meta">
-                                    <!-- <a href="course-details.html"><i class="far fa-clock"></i> 10 Hours</a>
-                                    <a href="course-details.html"><i class="far fa-folder-open"></i> 6 Lectures</a> -->
-                                    <a href="course-details.html">FREE&nbsp;&nbsp;&emsp; <del>Rs. 2599</del></a>
-                                </div><!-- /.course-one__meta -->
-                                <a href="#" class="course-one__link">See Preview</a><!-- /.course-one__link -->
-                            </div><!-- /.course-one__content -->
-                        </div><!-- /.course-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="course-one__single color-1">
-                            <div class="course-one__image">
-                                <img src="assets/images/course-1-1.jpg" alt="">
-                                <!-- <i class="far fa-heart"></i> -->
-                            </div><!-- /.course-one__image -->
-                            <div class="course-one__content">
-                                <a href="#" class="course-one__category">development</a><!-- /.course-one__category -->
-                                <h2 class="course-one__title"><a href="course-details.html">New react bootcamp</a></h2>
-                                <!-- /.course-one__title -->
-                                <div class="course-one__stars">
-                                    <span class="course-one__stars-wrap">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </span><!-- /.course-one__stars-wrap -->
-                                    <span class="course-one__count">4.8</span>
-                                    <!-- <span class="course-one__stars-count">250</span> -->
-                                </div><!-- /.course-one__stars -->
-                                <div class="course-one__meta">
-                                    <!-- <a href="course-details.html"><i class="far fa-clock"></i> 10 Hours</a>
-                                    <a href="course-details.html"><i class="far fa-folder-open"></i> 6 Lectures</a> -->
-                                    <a href="course-details.html">FREE&nbsp;&nbsp;&emsp; <del>Rs. 2599</del></a>
-                                </div><!-- /.course-one__meta -->
-                                <a href="#" class="course-one__link">See Preview</a><!-- /.course-one__link -->
-                            </div><!-- /.course-one__content -->
-                        </div><!-- /.course-one__single -->
-                    </div><!-- /.item -->
+                    <?php foreach($courses as $c){?>
+                        <div class="item">
+                            <div class="course-one__single <?=$c->cat_color?>">
+                                <div class="course-one__image">
+                                    <img src="<?=base_url()?>assets/images/<?=$c->img_src?>" alt="">
+                                    <!-- <i class="far fa-heart"></i> -->
+                                </div><!-- /.course-one__image -->
+                                <div class="course-one__content">
+                                    <a href="#" class="course-one__category"><?=$c->cat_name?></a>
+                                    <h2 class="course-one__title"><a href="course-details.html"><?=$c->name?></a></h2>
+                                    <!-- /.course-one__title -->
+                                    <div class="course-one__stars">
+                                        <span class="course-one__stars-wrap">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </span><!-- /.course-one__stars-wrap -->
+                                        <span class="course-one__count"><?=$c->rating?></span>
+                                        <!-- <span class="course-one__stars-count">250</span> -->
+                                    </div><!-- /.course-one__stars -->
+                                    <div class="course-one__meta">
+                                        <!-- <a href="course-details.html"><i class="far fa-clock"></i> 10 Hours</a>
+                                        <a href="course-details.html"><i class="far fa-folder-open"></i> 6 Lectures</a> -->
+                                        <a href="course-details.html"><?=$c->new_price?>&nbsp;&nbsp;&emsp; <del><?=$c->old_price?></del></a>
+                                    </div><!-- /.course-one__meta -->
+                                    <a href="#" class="course-one__link">See Preview</a><!-- /.course-one__link -->
+                                </div><!-- /.course-one__content -->
+                            </div><!-- /.course-one__single -->
+                        </div><!-- /.item -->
+                    <?php }?>
                 </div><!-- /.course-one__carousel -->
                 
                 <div class="text-center mt-3">
@@ -297,96 +167,17 @@
                         course categories</h2><!-- /.block-title__title -->
                 </div><!-- /.block-title -->
                 <div class="course-category-one__carousel owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="course-category-one__single color-1">
-                            <div class="course-category-one__icon">
-                                <i class="kipso-icon-desktop"></i><!-- /.kipso-icon-camera -->
-                            </div><!-- /.course-category-one__icon -->
-                            <h3 class="course-category-one__title"><a href="#">IT & Software</a></h3>
-                            <!-- /.course-category-one__title -->
-                        </div><!-- /.course-category-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="course-category-one__single color-2">
-                            <div class="course-category-one__icon">
-                                <i class="kipso-icon-web-programming"></i><!-- /.kipso-icon-camera -->
-                            </div><!-- /.course-category-one__icon -->
-                            <h3 class="course-category-one__title"><a href="#">Development</a></h3>
-                            <!-- /.course-category-one__title -->
-                        </div><!-- /.course-category-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="course-category-one__single color-3">
-                            <div class="course-category-one__icon">
-                                <i class="kipso-icon-music-player"></i><!-- /.kipso-icon-camera -->
-                            </div><!-- /.course-category-one__icon -->
-                            <h3 class="course-category-one__title"><a href="#">Music</a></h3>
-                            <!-- /.course-category-one__title -->
-                        </div><!-- /.course-category-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="course-category-one__single color-4">
-                            <div class="course-category-one__icon">
-                                <i class="kipso-icon-camera"></i><!-- /.kipso-icon-camera -->
-                            </div><!-- /.course-category-one__icon -->
-                            <h3 class="course-category-one__title"><a href="#">Photography</a></h3>
-                            <!-- /.course-category-one__title -->
-                        </div><!-- /.course-category-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="course-category-one__single color-5">
-                            <div class="course-category-one__icon">
-                                <i class="kipso-icon-targeting"></i><!-- /.kipso-icon-camera -->
-                            </div><!-- /.course-category-one__icon -->
-                            <h3 class="course-category-one__title"><a href="#">Marketing</a></h3>
-                            <!-- /.course-category-one__title -->
-                        </div><!-- /.course-category-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="course-category-one__single color-6">
-                            <div class="course-category-one__icon">
-                                <i class="kipso-icon-health"></i><!-- /.kipso-icon-camera -->
-                            </div><!-- /.course-category-one__icon -->
-                            <h3 class="course-category-one__title"><a href="#">Health & Fitness</a></h3>
-                            <!-- /.course-category-one__title -->
-                        </div><!-- /.course-category-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="course-category-one__single color-1">
-                            <div class="course-category-one__icon">
-                                <i class="kipso-icon-desktop"></i><!-- /.kipso-icon-camera -->
-                            </div><!-- /.course-category-one__icon -->
-                            <h3 class="course-category-one__title"><a href="#">IT & Software</a></h3>
-                            <!-- /.course-category-one__title -->
-                        </div><!-- /.course-category-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="course-category-one__single color-2">
-                            <div class="course-category-one__icon">
-                                <i class="kipso-icon-web-programming"></i><!-- /.kipso-icon-camera -->
-                            </div><!-- /.course-category-one__icon -->
-                            <h3 class="course-category-one__title"><a href="#">Development</a></h3>
-                            <!-- /.course-category-one__title -->
-                        </div><!-- /.course-category-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="course-category-one__single color-3">
-                            <div class="course-category-one__icon">
-                                <i class="kipso-icon-music-player"></i><!-- /.kipso-icon-camera -->
-                            </div><!-- /.course-category-one__icon -->
-                            <h3 class="course-category-one__title"><a href="#">Music</a></h3>
-                            <!-- /.course-category-one__title -->
-                        </div><!-- /.course-category-one__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="course-category-one__single color-4">
-                            <div class="course-category-one__icon">
-                                <i class="kipso-icon-camera"></i><!-- /.kipso-icon-camera -->
-                            </div><!-- /.course-category-one__icon -->
-                            <h3 class="course-category-one__title"><a href="#">Photography</a></h3>
-                            <!-- /.course-category-one__title -->
-                        </div><!-- /.course-category-one__single -->
-                    </div><!-- /.item -->
+                    <?php foreach($categories as $cat){?>
+                        <div class="item">
+                            <div class="course-category-one__single <?=$cat->cat_color?>">
+                                <div class="course-category-one__icon">
+                                    <i class="<?=$cat->cat_img_src?>"></i><!-- /.kipso-icon-camera -->
+                                </div><!-- /.course-category-one__icon -->
+                                <h3 class="course-category-one__title"><a href="#"><?=$cat->cat_name?></a></h3>
+                                <!-- /.course-category-one__title -->
+                            </div><!-- /.course-category-one__single -->
+                        </div><!-- /.item -->
+                    <?php }?>
                 </div><!-- /.course-category-one__carousel owl-carousel owl-theme -->
 
                 <a href="#" class="thm-btn">View All Categories</a><!-- /.thm-btn -->
@@ -398,15 +189,11 @@
                     <h2 class="block-title__title">Our company & partners</h2><!-- /.block-title__title -->
                 </div><!-- /.block-title -->
                 <div class="brand-one__carousel owl-carousel owl-theme">
-                    <div class="item">
-                        <img src="assets/images/ram-raj-logo.png" alt="Ramraj services">
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <img src="assets/images/tas-logo.png" alt="Total Agri solutions">
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <img src="assets/images/cluebix-logo.png" alt="Cluebix">
-                    </div><!-- /.item -->
+                    <?php foreach($partners as $p){?>
+                        <div class="item">
+                            <img src="<?=base_url()?>assets/images/<?=$p->img_src?>" alt="<?=$p->name?>">
+                        </div><!-- /.item -->
+                    <?php }?>
                 </div><!-- /.brand-one__carousel owl-carousel owl-theme -->
             </div><!-- /.container -->
         </section><!-- /.brand-one -->
@@ -417,54 +204,24 @@
                         & articles</h2><!-- /.block-title__title -->
                 </div><!-- /.block-title -->
                 <div class="blog-two__carousel owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="blog-two__single" style="background-image: url(assets/images/news1.jpg);">
-                            <div class="blog-two__inner">
-                                <a href="news-details.html" class="blog-two__date">
-                                    <span>25</span>
-                                    Jul
-                                </a><!-- /.blog-two__date -->
-                                <div class="blog-two__meta">
-                                    <a href="#">by Admin</a>
-                                </div><!-- /.blog-two__meta -->
-                                <h3 class="blog-two__title">
-                                    <a href="news-details.html">Summer high school journalism camp</a>
-                                </h3><!-- /.blog-two__title -->
-                            </div><!-- /.blog-two__inner -->
-                        </div><!-- /.blog-two__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="blog-two__single" style="background-image: url(assets/images/news2.jpg);">
-                            <div class="blog-two__inner">
-                                <a href="news-details.html" class="blog-two__date">
-                                    <span>25</span>
-                                    Jul
-                                </a><!-- /.blog-two__date -->
-                                <div class="blog-two__meta">
-                                    <a href="#">by Admin</a>
-                                </div><!-- /.blog-two__meta -->
-                                <h3 class="blog-two__title">
-                                    <a href="news-details.html">Get a tips to develop a quality education</a>
-                                </h3><!-- /.blog-two__title -->
-                            </div><!-- /.blog-two__inner -->
-                        </div><!-- /.blog-two__single -->
-                    </div><!-- /.item -->
-                    <div class="item">
-                        <div class="blog-two__single" style="background-image: url(assets/images/news3.jpg); background-size: cover;">
-                            <div class="blog-two__inner">
-                                <a href="news-details.html" class="blog-two__date">
-                                    <span>25</span>
-                                    Jul
-                                </a><!-- /.blog-two__date -->
-                                <div class="blog-two__meta">
-                                    <a href="#">by Admin</a>
-                                </div><!-- /.blog-two__meta -->
-                                <h3 class="blog-two__title">
-                                    <a href="news-details.html">Learn variety of programs and courses</a>
-                                </h3><!-- /.blog-two__title -->
-                            </div><!-- /.blog-two__inner -->
-                        </div><!-- /.blog-two__single -->
-                    </div><!-- /.item -->
+                    <?php foreach($events as $e){?>
+                        <div class="item">
+                            <div class="blog-two__single" style="background-image: url(<?=base_url()?>assets/images/<?=$e->img_src?>);">
+                                <div class="blog-two__inner">
+                                    <a href="news-details.html" class="blog-two__date">
+                                        <span><?=date('d',strtotime($e->date))?></span>
+                                        <?=date('M',strtotime($e->date))?>
+                                    </a><!-- /.blog-two__date -->
+                                    <div class="blog-two__meta">
+                                        <a href="#">by <?=$e->author?></a>
+                                    </div><!-- /.blog-two__meta -->
+                                    <h3 class="blog-two__title">
+                                        <a href="news-details.html"><?=$e->heading?></a>
+                                    </h3><!-- /.blog-two__title -->
+                                </div><!-- /.blog-two__inner -->
+                            </div><!-- /.blog-two__single -->
+                        </div><!-- /.item -->
+                    <?php }?>
                 </div><!-- /.blog-two__carousel owl-carousel owl-theme -->
             </div><!-- /.container -->
         </section><!-- /.blog-one blog-page -->

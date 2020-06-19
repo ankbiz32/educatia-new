@@ -11,7 +11,7 @@ class Home extends MY_Controller {
 	{
 		$banners=$this->fetch->getInfo('banners');
 		$categories=$this->fetch->getInfoLim('categories','cat_id', '6');
-		$courses=$this->fetch->getInfoLim('courses','id', '6');
+		$courses=$this->fetch->getCoursesLim();
 		$partners=$this->fetch->getInfo('partners');
 		$events=$this->fetch->getInfoLim('events','id', '6');
 		$gallery=$this->fetch->getInfoLim('gallery','id', '6');
