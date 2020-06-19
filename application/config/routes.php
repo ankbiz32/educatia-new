@@ -52,3 +52,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['courses'] = 'Home/courses';
+$route['category/(:num)/(:any)'] = 'Home/coursesByCat/$1';
+$route['course/(:num)/(:any)'] = 'Home/courseDetail/$1';
+$route['news'] = 'Home/news';
+$route['news/(:num)/(:any)'] = 'Home/newsDetail/$1';
+$route['categories'] = 'Home/categories';
+$route['about'] = 'Home/about';
+$route['training'] = 'Home/training';
+$route['contact'] = 'Home/contact';
+$route['gallery'] = 'Home/gallery';
+$route['privacy'] = 'Home/privacy';

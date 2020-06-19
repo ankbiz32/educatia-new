@@ -7,6 +7,13 @@ class GetModel extends CI_Model{
         return $this->db->get($table)->result();
     }
 
+    // Fetch info
+    public function getInfoParams($table,$col,$id)
+    {
+        return $this->db->where($col,$id)
+                        ->get($table)->result();
+    }
+
     // Fetch info by id
     public function getInfoById($id, $table)
     {
@@ -47,14 +54,34 @@ class GetModel extends CI_Model{
         return $this->db->get()->result();
     }
 
-    public function getCoursesLim()
+    public function getCoursesLim($lim)
     {
         $this->db->select('*')
                 ->from('courses c')
                 ->order_by('id','desc')
-                ->limit(6)
+                ->limit($lim)
                 ->join('categories ca', 'c.cat_id = ca.cat_id', 'LEFT');
         return $this->db->get()->result();
+    }
+
+    public function getCoursesByCat($id)
+    {
+        $this->db->select('*')
+                ->from('courses c')
+                ->order_by('id','desc')
+                ->join('categories ca', 'c.cat_id = ca.cat_id', 'LEFT')
+                ->where('ca.cat_id',$id);
+        return $this->db->get()->result();
+    }
+
+    public function getCourseById($id)
+    {
+        $this->db->select('*')
+                ->from('courses c')
+                ->order_by('id','desc')
+                ->join('categories ca', 'c.cat_id = ca.cat_id', 'LEFT')
+                ->where('id',$id);
+        return $this->db->get()->row();
     }
     
     // Fetch Enquiries

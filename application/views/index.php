@@ -20,6 +20,7 @@
                 <a href="#" class="banner-carousel-btn__right-btn"><i class="kipso-icon-right-arrow"></i></a>
             </div><!-- /.banner-carousel-btn -->
         </div><!-- /.banner-wrapper -->
+
         <section class="course-category-two">
             <div class="container text-center">
                 <div class="inner-container">
@@ -31,7 +32,7 @@
                                 <div class="course-category-one__icon">
                                     <i class="<?=$cat->cat_img_src?>"></i><!-- /.kipso-icon-camera -->
                                 </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#"><?=$cat->cat_name?></a></h3>
+                                <h3 class="course-category-one__title"><a href="<?=base_url('category/').$cat->cat_id.'/'.$cat->cat_name?>"><?=$cat->cat_name?></a></h3>
                                 <!-- /.course-category-one__title -->
                             </div><!-- /.course-category-one__single -->
                         </div><!-- /.item -->
@@ -40,6 +41,7 @@
                 </div><!-- /.inner-container -->
             </div><!-- /.container -->
         </section><!-- /.course-category-two -->
+
         <section class="about-two">
             <div class="container">
                 <div class="row">
@@ -85,6 +87,7 @@
                 </div><!-- /.row -->
             </div><!-- /.container -->
         </section><!-- /.about-two -->
+
         <section class="course-one__top-title home-one">
             <div class="container">
                 <div class="block-title mb-0">
@@ -94,6 +97,7 @@
             </div><!-- /.container -->
             <div class="course-one__top-title__curve"></div><!-- /.course-one__top-title__curve -->
         </section><!-- /.course-one__top-title -->
+
         <section class="course-one course-one__teacher-details home-one">
             <div class="container">
                 <div class="course-one__carousel owl-carousel owl-theme">
@@ -105,8 +109,8 @@
                                     <!-- <i class="far fa-heart"></i> -->
                                 </div><!-- /.course-one__image -->
                                 <div class="course-one__content">
-                                    <a href="#" class="course-one__category"><?=$c->cat_name?></a>
-                                    <h2 class="course-one__title"><a href="course-details.html"><?=$c->name?></a></h2>
+                                    <a href="<?=base_url('category/').$c->cat_id.'/'.$c->cat_name?>" class="course-one__category"><?=$c->cat_name?></a>
+                                    <h2 class="course-one__title"><a href="<?=base_url('course/').$c->id.'/'.$c->slug?>"><?=$c->name?></a></h2>
                                     <!-- /.course-one__title -->
                                     <div class="course-one__stars">
                                         <span class="course-one__stars-wrap">
@@ -122,9 +126,9 @@
                                     <div class="course-one__meta">
                                         <!-- <a href="course-details.html"><i class="far fa-clock"></i> 10 Hours</a>
                                         <a href="course-details.html"><i class="far fa-folder-open"></i> 6 Lectures</a> -->
-                                        <a href="course-details.html"><?=$c->new_price?>&nbsp;&nbsp;&emsp; <del><?=$c->old_price?></del></a>
+                                        <a href="<?=base_url('course/').$c->id.'/'.$c->slug?>"><?=$c->new_price?>&nbsp;&nbsp;&emsp; <del><?=$c->old_price?></del></a>
                                     </div><!-- /.course-one__meta -->
-                                    <a href="#" class="course-one__link">See Preview</a><!-- /.course-one__link -->
+                                    <a href="<?=base_url('course/').$c->id.'/'.$c->slug?>" class="course-one__link">See Preview</a><!-- /.course-one__link -->
                                 </div><!-- /.course-one__content -->
                             </div><!-- /.course-one__single -->
                         </div><!-- /.item -->
@@ -132,10 +136,11 @@
                 </div><!-- /.course-one__carousel -->
                 
                 <div class="text-center mt-3">
-                    <a href="courses.html" class="thm-btn text-lg py-3 px-5">View All Courses</a>
+                    <a href="<?-base_url('courses')?>" class="thm-btn text-lg py-3 px-5">View All Courses</a>
                 </div>
             </div><!-- /.container -->
         </section><!-- /.course-one course-page -->
+        
         <section class="video-two">
             <div class="container">
                 <img src="assets/images/scratch-1-1.png" class="video-two__scratch" alt="">
@@ -160,6 +165,7 @@
                 </div><!-- /.row -->
             </div><!-- /.container -->
         </section><!-- /.video-two -->
+
         <section class="thm-gray-bg course-category-one">
             <div class="container-fluid text-center">
                 <div class="block-title text-center">
@@ -173,16 +179,17 @@
                                 <div class="course-category-one__icon">
                                     <i class="<?=$cat->cat_img_src?>"></i><!-- /.kipso-icon-camera -->
                                 </div><!-- /.course-category-one__icon -->
-                                <h3 class="course-category-one__title"><a href="#"><?=$cat->cat_name?></a></h3>
+                                <h3 class="course-category-one__title"><a href="<?=base_url('category/').$cat->cat_id.'/'.$cat->cat_name?>"><?=$cat->cat_name?></a></h3>
                                 <!-- /.course-category-one__title -->
                             </div><!-- /.course-category-one__single -->
                         </div><!-- /.item -->
                     <?php }?>
                 </div><!-- /.course-category-one__carousel owl-carousel owl-theme -->
 
-                <a href="#" class="thm-btn">View All Categories</a><!-- /.thm-btn -->
+                <a href="<?=base_url('categories')?>" class="thm-btn">View All Categories</a><!-- /.thm-btn -->
             </div><!-- /.container-fluid -->
         </section><!-- /.thm-gray-bg course-category-one -->
+
         <section class="brand-two ">
             <div class="container">
                 <div class="block-title">
@@ -197,6 +204,7 @@
                 </div><!-- /.brand-one__carousel owl-carousel owl-theme -->
             </div><!-- /.container -->
         </section><!-- /.brand-one -->
+
         <section class="blog-two">
             <div class="container">
                 <div class="block-title text-center">
@@ -208,15 +216,15 @@
                         <div class="item">
                             <div class="blog-two__single" style="background-image: url(<?=base_url()?>assets/images/<?=$e->img_src?>);">
                                 <div class="blog-two__inner">
-                                    <a href="news-details.html" class="blog-two__date">
+                                    <a href="<?=base_url('news/').$e->id.'/'.$e->slug?>" class="blog-two__date">
                                         <span><?=date('d',strtotime($e->date))?></span>
                                         <?=date('M',strtotime($e->date))?>
                                     </a><!-- /.blog-two__date -->
                                     <div class="blog-two__meta">
-                                        <a href="#">by <?=$e->author?></a>
+                                        <a href="<?=base_url('news/').$e->id.'/'.$e->slug?>">by <?=$e->author?></a>
                                     </div><!-- /.blog-two__meta -->
                                     <h3 class="blog-two__title">
-                                        <a href="news-details.html"><?=$e->heading?></a>
+                                        <a href="<?=base_url('news/').$e->id.'/'.$e->slug?>"><?=$e->heading?></a>
                                     </h3><!-- /.blog-two__title -->
                                 </div><!-- /.blog-two__inner -->
                             </div><!-- /.blog-two__single -->

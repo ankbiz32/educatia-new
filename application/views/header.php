@@ -49,7 +49,7 @@
                 <div class="container clearfix">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="logo-box clearfix">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="<?=base_url()?>">
                             <img src="<?=base_url()?>assets/images/logo-dark.png" class="main-logo" width="128" alt="Awesome Image" />
                         </a>
                         <div class="div d-flex ml-auto" style="align-items:center">

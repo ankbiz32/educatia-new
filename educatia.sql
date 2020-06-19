@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2020 at 02:57 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.6
+-- Generation Time: Jun 19, 2020 at 08:13 PM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.2.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -43,7 +44,7 @@ CREATE TABLE `banners` (
 INSERT INTO `banners` (`id`, `img_src`, `tagline`, `head`, `link_text`, `link_src`) VALUES
 (1, 'ad1.jpg', 'High quality courses', 'Read & Learn in an easy way', 'Learn more', ''),
 (2, 'ad2.png', 'High quality courses', 'Learning to Earning', 'Learn more', ''),
-(3, 'ad3.jpg', 'High quality courses', 'Learn from great teachers', 'Learn more', '');
+(3, 'ad5.jpg', 'High quality courses', 'Learn from great teachers', 'Learn more', '');
 
 -- --------------------------------------------------------
 
@@ -63,10 +64,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`cat_id`, `cat_name`, `cat_img_src`, `cat_color`) VALUES
-(1, 'Photography', 'kipso-icon-camera', '#2da397'),
-(2, 'Music', 'kipso-icon-music-player', '#f16101'),
-(3, 'Marketing', 'kipso-icon-targeting', '#2da397'),
-(4, 'Development', 'kipso-icon-web-programming', '#1888c9');
+(1, 'Photography', 'kipso-icon-camera', 'color-1'),
+(2, 'Music', 'kipso-icon-music-player', 'color-2'),
+(3, 'Marketing', 'kipso-icon-targeting', 'color-3'),
+(4, 'Development', 'kipso-icon-web-programming', 'color-4');
 
 -- --------------------------------------------------------
 
@@ -84,17 +85,18 @@ CREATE TABLE `courses` (
   `new_price` varchar(30) NOT NULL,
   `level` varchar(30) NOT NULL,
   `lang` varchar(30) NOT NULL,
-  `overview` longtext NOT NULL
+  `overview` longtext NOT NULL,
+  `slug` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `cat_id`, `name`, `rating`, `img_src`, `old_price`, `new_price`, `level`, `lang`, `overview`) VALUES
-(1, 1, 'Learn photography skills online', '4', 'photo-course.jpg', 'Rs. 1599/-', 'FREE', 'Beginner', 'English', 'Aelltes port lacus quis enim var sed efficitur turpis gilla sed sit Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\r\n\r\n\r\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of lorem ipsum amet finibus eros. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.'),
-(2, 4, 'Learn development skills online', '4.8', 'dev-course.jpg', 'Rs. 1599/-', 'FREE', 'Beginner', 'English', 'Aelltes port lacus quis enim var sed efficitur turpis gilla sed sit Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\r\n\r\n\r\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of lorem ipsum amet finibus eros. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.'),
-(3, 2, 'Learn music online', '3.1', 'music-course.jpg', 'Rs. 1599/-', 'FREE', 'Beginner', 'English', 'Aelltes port lacus quis enim var sed efficitur turpis gilla sed sit Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\r\n\r\n\r\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of lorem ipsum amet finibus eros. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.');
+INSERT INTO `courses` (`id`, `cat_id`, `name`, `rating`, `img_src`, `old_price`, `new_price`, `level`, `lang`, `overview`, `slug`) VALUES
+(1, 1, 'Learn photography skills online', '4', 'photo-course.jpg', 'Rs. 1599/-', 'FREE', 'Beginner', 'English', 'Aelltes port lacus quis enim var sed efficitur turpis gilla sed sit Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\r\n\r\n\r\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of lorem ipsum amet finibus eros. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.', 'Learn-photography-skills-online'),
+(2, 4, 'Learn development skills online', '4.8', 'dev-course.jpg', 'Rs. 3599/-', 'FREE', 'Beginner', 'English', 'Aelltes port lacus quis enim var sed efficitur turpis gilla sed sit Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\r\n\r\n\r\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of lorem ipsum amet finibus eros. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.', 'Learn-development-skills-online'),
+(3, 2, 'Learn music online', '3.1', 'music-course.jpg', 'Rs. 1099/-', 'FREE', 'Beginner', 'English', 'Aelltes port lacus quis enim var sed efficitur turpis gilla sed sit Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\r\n\r\n\r\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of lorem ipsum amet finibus eros. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.', 'Learn-music-online');
 
 -- --------------------------------------------------------
 
@@ -133,9 +135,9 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `img_src`, `heading`, `descr`, `date`, `author`, `slug`) VALUES
-(1, 'news1.jpg', 'Event Heading', 'Something about the event. A small description for the image like a seminar held at some place.', '2020-06-01', '', 'Event-heading'),
-(2, 'news2.jpg', 'Another Event ', ' Something about the event. A small description for the image like a seminar held at some place.Something about the event. A small description for the image like a seminar held at some place.', '2020-03-17', '', 'Another-event '),
-(3, 'news3.jpg', 'Yet Another Event', 'Something about the event. A small description for the image like a seminar held at some place.', '2020-06-18', '', 'Yet-another-event');
+(1, 'news1.jpg', 'Event Heading', 'Something about the event. A small description for the image like a seminar held at some place.', '2020-06-01', 'Admin', 'Event-heading'),
+(2, 'news2.jpg', 'Another Event ', ' Something about the event. A small description for the image like a seminar held at some place.Something about the event. A small description for the image like a seminar held at some place.', '2020-03-17', 'Admin', 'Another-event '),
+(3, 'news3.jpg', 'Yet Another Event', 'Something about the event. A small description for the image like a seminar held at some place.', '2020-06-18', 'Admin', 'Yet-another-event');
 
 -- --------------------------------------------------------
 
@@ -218,7 +220,7 @@ CREATE TABLE `partners` (
 INSERT INTO `partners` (`id`, `img_src`, `name`) VALUES
 (1, 'ram-raj-logo.png', 'Ramraj services'),
 (2, 'cluebix-logo.png', 'Cluebix softwares'),
-(3, 'tas-logo', 'TotalAgri Solutions');
+(3, 'tas-logo.png', 'TotalAgri Solutions');
 
 -- --------------------------------------------------------
 
