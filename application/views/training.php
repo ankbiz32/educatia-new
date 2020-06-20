@@ -14,7 +14,7 @@
 
                 <div class="row mb-5">
                     <div class="col-sm-6 col-md-6">
-                        <img src="assets/images/blog-2-3.jpg" alt="" class="img-fluid" />
+                        <img src="assets/images/tr1.jpg" alt="" class="" />
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <h2 class="omt_name text-dark">Workshops & Seminars:</h2>
@@ -26,7 +26,7 @@
 
                 <div class="row flex-row-reverse mb-5">
                     <div class="col-sm-6 col-md-6">
-                        <img src="assets/images/blog-2-3.jpg" alt="" class="img-fluid ml-auto d-block" />
+                        <img src="assets/images/tr2.jpg" alt="" class="img-cover ml-auto d-block" />
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <h2 class="omt_name text-dark">Trainings:</h2>
@@ -39,7 +39,7 @@
 
                 <div class="row mb-5">
                     <div class="col-sm-6 col-md-6">
-                        <img src="assets/images/blog-2-3.jpg" alt="" class="img-fluid" />
+                        <img src="assets/images/tr3.jpg" alt="" class="img-cover" />
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <h2 class="omt_name text-dark">Industrial Internships:</h2>
@@ -50,7 +50,7 @@
 
                 <div class="row flex-row-reverse mb-5">
                     <div class="col-sm-6 col-md-6">
-                        <img src="assets/images/blog-2-3.jpg" alt="" class="img-fluid ml-auto d-block" />
+                        <img src="assets/images/tr4.jpg" alt="" class="img-cover ml-auto d-block" />
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <h2 class="omt_name text-dark">Project designing & Prototyping:</h2>
@@ -62,7 +62,7 @@
 
                 <div class="row mb-5">
                     <div class="col-sm-6 col-md-6">
-                        <img src="assets/images/blog-2-3.jpg" alt="" class="img-fluid" />
+                        <img src="assets/images/tr5.jpg" alt="" class="img-cover" />
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <h2 class="omt_name text-dark">Product Commercialization:</h2>
@@ -76,7 +76,7 @@
 
                 <div class="row flex-row-reverse mb-5">
                     <div class="col-sm-6 col-md-6">
-                        <img src="assets/images/blog-2-3.jpg" alt="" class="img-fluid ml-auto d-block" />
+                        <img src="assets/images/tr6.jpg" alt="" class="img-cover ml-auto d-block" />
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <h2 class="omt_name text-dark">Placement Assistance:</h2>

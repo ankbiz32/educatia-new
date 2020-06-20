@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Dashboard</h1>
+                <h1 class="m-0 text-dark"><i class="fa fa-columns"></i>&nbsp;Dashboard</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -32,10 +32,12 @@
                 <table id="bookdt" class="table table-bordered table-hover" style="width:100%;">
                   <thead>
                     <tr>
+                      <th>Enq. ref.</th>
                       <th>Enq. Date</th>
                       <th>Name</th>
                       <th>E-mail</th>
                       <th>Phone</th>
+                      <th>Message</th>
                       <th>Purpose</th>
                       <th>Status</th>
                     </tr>
@@ -44,12 +46,44 @@
                     <!-- display Enquiries-->
                     <?php foreach($enq as $enqui){?>
                       <tr>
+                        <td><?=$enqui->id?></td>
                         <td><?=date("d-m-Y",strtotime("$enqui->date"))?></td>
                         <td><?=$enqui->name?></td>
                         <td><?=$enqui->email?></td>
                         <td><?=$enqui->phone?></td>
                         <td><?=$enqui->message?></td>
+                        <td><?=$enqui->purpose?></td>
                         <td><?= $enqui->status=='new' ? '<a href="'.base_url('Edit/enqStatus/').$enqui->id.'" class="badge badge-danger">'.$enqui->status.'</a>' : $enqui->status?></td>
+                      </tr>
+                    <?php }?>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Your subscriptions:</h2>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="bookdt" class="table table-bordered table-hover" style="width:100%;">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>E-mail</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- display Enquiries-->
+                    <?php foreach($sub as $s){?>
+                      <tr>
+                        <td><?=date("d-m-Y",strtotime("$s->date"))?></td>
+                        <td><?=$s->email?></td>
                       </tr>
                     <?php }?>
                   </tbody>

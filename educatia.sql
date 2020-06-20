@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2020 at 08:13 PM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.2.20
+-- Generation Time: Jun 20, 2020 at 02:40 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -66,7 +65,6 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`cat_id`, `cat_name`, `cat_img_src`, `cat_color`) VALUES
 (1, 'Photography', 'kipso-icon-camera', 'color-1'),
 (2, 'Music', 'kipso-icon-music-player', 'color-2'),
-(3, 'Marketing', 'kipso-icon-targeting', 'color-3'),
 (4, 'Development', 'kipso-icon-web-programming', 'color-4');
 
 -- --------------------------------------------------------
@@ -111,7 +109,8 @@ CREATE TABLE `enquiries` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(2048) NOT NULL,
   `message` varchar(2048) NOT NULL,
-  `status` varchar(10) NOT NULL DEFAULT 'new'
+  `status` varchar(10) NOT NULL DEFAULT 'new',
+  `purpose` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -136,8 +135,7 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`id`, `img_src`, `heading`, `descr`, `date`, `author`, `slug`) VALUES
 (1, 'news1.jpg', 'Event Heading', 'Something about the event. A small description for the image like a seminar held at some place.', '2020-06-01', 'Admin', 'Event-heading'),
-(2, 'news2.jpg', 'Another Event ', ' Something about the event. A small description for the image like a seminar held at some place.Something about the event. A small description for the image like a seminar held at some place.', '2020-03-17', 'Admin', 'Another-event '),
-(3, 'news3.jpg', 'Yet Another Event', 'Something about the event. A small description for the image like a seminar held at some place.', '2020-06-18', 'Admin', 'Yet-another-event');
+(2, 'news2.jpg', 'Another Event ', ' Something about the event. A small description for the image like a seminar held at some place.Something about the event. A small description for the image like a seminar held at some place.', '2020-03-17', 'Admin', 'Another-event ');
 
 -- --------------------------------------------------------
 
@@ -178,8 +176,7 @@ CREATE TABLE `gallery` (
 INSERT INTO `gallery` (`id`, `img_src`) VALUES
 (1, 'p1.jpg'),
 (2, 'p2.png'),
-(3, 'p3.jpg'),
-(4, 'p4.png'),
+(3, 'news11.jpg'),
 (5, 'p5.jpg'),
 (6, 'p6.jpg');
 
@@ -225,6 +222,18 @@ INSERT INTO `partners` (`id`, `img_src`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subscriptions`
+--
+
+CREATE TABLE `subscriptions` (
+  `id` int(11) NOT NULL,
+  `email` varchar(400) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -244,7 +253,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `pwd`, `fname`, `lname`, `email`, `status`, `role`) VALUES
-(1, 'adminrrs', '$2y$10$NG9k47y4y8qJWOCKYyd30O45/c2GWe3p2SnMYYVr7W5QWqUwwbUaW', 'Demo', 'User', 'info.ramrajservices@gmail.com', '1', 'admin');
+(1, 'adminrrs', '$2y$10$NG9k47y4y8qJWOCKYyd30O45/c2GWe3p2SnMYYVr7W5QWqUwwbUaW', 'Demo', 'User', 'ramrajservices@gmail.com', '1', 'admin');
 
 -- --------------------------------------------------------
 
@@ -332,6 +341,12 @@ ALTER TABLE `partners`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -351,43 +366,43 @@ ALTER TABLE `webprofile`
 -- AUTO_INCREMENT for table `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `enquiries`
 --
 ALTER TABLE `enquiries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `feedbacks`
 --
 ALTER TABLE `feedbacks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `know_us`
@@ -399,7 +414,13 @@ ALTER TABLE `know_us`
 -- AUTO_INCREMENT for table `partners`
 --
 ALTER TABLE `partners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`

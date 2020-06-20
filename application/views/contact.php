@@ -49,16 +49,16 @@
             <div class="container">
                 <h2 class="contact-one__title text-center">Get in touch <br>
                     with us</h2><!-- /.contact-one__title -->
-                <form action="assets/inc/sendemail.php" class="contact-one__form contact-form-validated">
+                <form action="<?=base_url('Home/Mail/Contact')?>" method="POST" class="contact-one__form contact-form-validated">
                     <div class="row low-gutters">
                         <div class="col-lg-6">
-                            <input type="text" name="name" placeholder="Your Name">
+                        <input type="text" maxlength="20" name="name" id="name" x-moz-errormessage="Enter name here" oninvalid="this.setCustomValidity('Enter name here')" oninput="this.setCustomValidity('')" class="" placeholder="Your Name" required>
                         </div><!-- /.col-lg-6 -->
                         <div class="col-lg-6">
-                            <input type="text" placeholder="Email Address" name="email">
+                            <input type="email" placeholder="Email Address" name="email" class="" required>
                         </div><!-- /.col-lg-6 -->
                         <div class="col-lg-12">
-                            <textarea placeholder="Write Message" name="message"></textarea>
+                            <textarea placeholder="Write Message" maxlength="300" name="message"></textarea>
                             <div class="text-center">
                                 <button type="submit" class="contact-one__btn thm-btn">Submit Comment</button>
                             </div><!-- /.text-center -->

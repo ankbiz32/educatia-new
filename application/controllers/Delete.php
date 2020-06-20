@@ -10,6 +10,22 @@ class Delete extends MY_Controller {
                 $this->load->model('DeleteModel','delete');
         }
 
+        public function Banner($id)
+        {
+            
+            $d= $this->fetch->getInfoById($id, 'banners');
+            $path= 'assets/images/'.$d->img_src;
+            $status= $this->delete->deleteInfo($id, 'banners');
+            if($status){
+                unlink("$path");
+                $this->session->set_flashdata('success','Banner Deleted!');
+                redirect('Admin/Banners');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error!');
+                redirect('Admin/Banners');
+            }
+        }
 
         // Delete Feedbacks
         public function Feedback($id)
@@ -25,6 +41,26 @@ class Delete extends MY_Controller {
             else{
                 $this->session->set_flashdata('failed','Error!');
                 redirect('Admin/Feedbacks');
+            }
+        }
+        
+
+        public function Category($id)
+        {
+            $d= $this->fetch->getInfoParams('courses', 'cat_id', $id);
+            $status= $this->delete->deleteInfoCol('cat_id', $id, 'courses');
+            if($status){
+                $status= $this->delete->deleteInfoCol('cat_id', $id, 'categories');
+                foreach($d as $dd){
+                    $path= 'assets/images/'.$dd->img_src;
+                    unlink($path);
+                }
+                $this->session->set_flashdata('success','Category Deleted!');
+                redirect('Admin/Categories');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error!');
+                redirect('Admin/Categories');
             }
         }
         
@@ -46,6 +82,23 @@ class Delete extends MY_Controller {
             }
         }
 
+        public function Course($id)
+        {
+            
+            $d= $this->fetch->getInfoById($id, 'courses');
+            $path= 'assets/images/'.$d->img_src;
+            $status= $this->delete->deleteInfo($id, 'courses');
+            if($status){
+                unlink("$path");
+                $this->session->set_flashdata('success','Course Deleted!');
+                redirect('Admin/Courses');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error!');
+                redirect('Admin/Courses');
+            }
+        }
+
         // Delete Gallery
         public function Gallery($id)
         {
@@ -61,6 +114,23 @@ class Delete extends MY_Controller {
             else{
                 $this->session->set_flashdata('failed','Error!');
                 redirect('Admin/Gallery');
+            }
+        }
+
+        public function Partner($id)
+        {
+            
+            $d= $this->fetch->getInfoById($id, 'partners');
+            $path= 'assets/images/'.$d->img_src;
+            $status= $this->delete->deleteInfo($id, 'partners');
+            if($status){
+                unlink($path);
+                $this->session->set_flashdata('success','Image Deleted!');
+                redirect('Admin/Partners');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error!');
+                redirect('Admin/Partners');
             }
         }
 

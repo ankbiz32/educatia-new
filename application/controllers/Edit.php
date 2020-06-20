@@ -11,7 +11,8 @@ class Edit extends MY_Controller {
             $this->load->model('EditModel','edit');
         }
 
-        public function AdBanner($id)
+
+        public function Banner($id)
         {
             $data=$this->input->post();
 
@@ -21,40 +22,37 @@ class Edit extends MY_Controller {
                     "upload_path" => $path,
                     "allowed_types" => "jpg|jpeg|png|bmp|webp|gif",
                     "remove_spaces" => TRUE,
-                    "max_size" => 350
+                    "max_size" => 1100
                 );
                 $this->load->library('upload', $initialize);
                 if (!$this->upload->do_upload('img')) {
                     $this->session->set_flashdata('failed',strip_tags($this->upload->display_errors() ) );
-                    redirect('Admin/AdBanners');
+                    redirect('Admin/Banners');
                 } 
                 else {
                     $imgdata = $this->upload->data();
                     $data['img_src'] = $imgdata['file_name'];
-                    $ad= $this->fetch->getInfoById($id,'ads');
-                    $path= 'assets/images/'.$ad->img_src;
-                    $status= $this->edit->updateInfo($data, $id, 'ads');
-                    if($status){
-                        unlink($path);
-                        $this->session->set_flashdata('success','Ad Banner Updated !');
-                        redirect('Admin/AdBanners');
-                    }
-                    else{
-                        $this->session->set_flashdata('failed','Error !');
-                        redirect('Admin/AdBanners');
-                    }
+                    $d= $this->fetch->getInfoById($id,'banners');
+                    $path= 'assets/images/'.$d->img_src;
                 }
             }
+
+            $status= $this->edit->updateInfo($data, $id, 'banners');
+            if($status){
+                unlink($path);
+                $this->session->set_flashdata('success','Banner Updated !');
+                redirect('Admin/Banners');
+            }
             else{
-                $this->session->set_flashdata('failed','No File Chosen !');
-                redirect('Admin/AdBanners');
+                $this->session->set_flashdata('failed','Error !');
+                redirect('Admin/Banners');
             }
         }
 
         public function Event($id)
         {
             $data=$this->input->post();
-
+            $data['slug']=$this->generate_url_slug($this->input->post('heading'),'events');
             if($_FILES['img']['name']!=null){
                 $path ='assets/images';
                 $initialize = array(
@@ -79,7 +77,7 @@ class Edit extends MY_Controller {
             $status= $this->edit->updateInfo($data, $id, 'events');
             if($status){
                 unlink($path);
-                $this->session->set_flashdata('success','Event Updated !');
+                $this->session->set_flashdata('success','Updated !');
                 redirect('Admin/Events');
             }
             else{
@@ -88,18 +86,66 @@ class Edit extends MY_Controller {
             }
         }
 
-        public function KnowUs($id)
+        public function Course($id)
         {
             $data=$this->input->post();
-            $status= $this->edit->updateLink($data, $id);
+            $data['slug']=$this->generate_url_slug($this->input->post('name'),'courses');
+            if($_FILES['img']['name']!=null){
+                $path ='assets/images';
+                $initialize = array(
+                    "upload_path" => $path,
+                    "allowed_types" => "jpg|jpeg|png|bmp|webp|gif",
+                    "remove_spaces" => TRUE,
+                    "max_size" => 1100
+                );
+                $this->load->library('upload', $initialize);
+                if (!$this->upload->do_upload('img')) {
+                    $this->session->set_flashdata('failed',strip_tags($this->upload->display_errors() ) );
+                    redirect('Admin/Courses');
+                } 
+                else {
+                    $imgdata = $this->upload->data();
+                    $data['img_src'] = $imgdata['file_name'];
+                    $d= $this->fetch->getInfoById($id,'courses');
+                    $path= 'assets/images/'.$d->img_src;
+                }
+            }
+
+            $status= $this->edit->updateInfo($data, $id, 'courses');
             if($status){
-                $this->session->set_flashdata('success','Link Updated !');
-                redirect('Admin/KnowUs');
+                unlink($path);
+                $this->session->set_flashdata('success','Updated !');
+                redirect('Admin/Courses');
             }
             else{
                 $this->session->set_flashdata('failed','Error !');
-                redirect('Admin/KnowUs');
+                redirect('Admin/Courses');
             }
+        }
+
+        public function Category($id)
+        {
+            $this->form_validation->set_rules('cat_name', 'Name', 'required');
+            $this->form_validation->set_rules('cat_color', 'Color', 'required');
+            $this->form_validation->set_rules('cat_img_src', 'Icon', 'required');
+            if($this->form_validation->run() == true){
+                $data=$this->input->post();
+                $status= $this->edit->updateInfoByCol($data, 'cat_id', $id, 'categories');
+
+                if($status){
+                    $this->session->set_flashdata('success','Category updated !' );
+                    redirect('Admin/Categories');
+                }
+                else{
+                    $this->session->set_flashdata('failed','Error !');
+                    redirect('Admin/Categories');
+                }
+                
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('Admin/Categories');
+            } 
         }
 
         public function Feedback($id)
@@ -178,9 +224,44 @@ class Edit extends MY_Controller {
             } 
         }
 
-
-
-
+        public function Partner($id)
+        {
+            if($_FILES['img']['name']!=null){
+                $path ='assets/images';
+                $initialize = array(
+                    "upload_path" => $path,
+                    "allowed_types" => "jpg|jpeg|png|bmp|webp",
+                    "remove_spaces" => TRUE,
+                    "max_size" => 350
+                );
+                $this->load->library('upload', $initialize);
+                if (!$this->upload->do_upload('img')) {
+                    $this->session->set_flashdata('failed',strip_tags($this->upload->display_errors()) );
+                    redirect('Admin/Partners');
+                }
+                else {
+                    $imgdata = $this->upload->data();
+                    $imagename = $imgdata['file_name'];
+                    $data=array('img_src'=>$imagename);
+                    $d= $this->fetch->getInfoById($id,'partners');
+                    $path= 'assets/images/'.$d->img_src;
+                    $status= $this->edit->updateInfo($data,$id, 'partners');
+                    if($status){
+                        unlink($path);
+                        $this->session->set_flashdata('success','Image Updated!' );
+                        redirect('Admin/Partners');
+                    }
+                    else{
+                        $this->session->set_flashdata('failed','Error !');
+                        redirect('Admin/Partners');
+                    }
+                } 
+            }
+            else{
+                $this->session->set_flashdata('failed','No image selected !');
+                redirect('Admin/Gallery');
+            } 
+        }
 
         public function webProfile()
         {
@@ -224,6 +305,28 @@ class Edit extends MY_Controller {
                 redirect('Admin/adminProfile');
             }
         }
+
+        function generate_url_slug($string,$table,$field='slug',$key=NULL,$value=NULL){
+            $t =& get_instance();
+            $slug = url_title($string);
+            $slug = strtolower($slug);
+            $i = 0;
+            $params = array ();
+            $params[$field] = $slug;
+            if($key)$params["$key !="] = $value; 
+            while ($t->db->where($params)->get($table)->num_rows())
+            {
+                if (!preg_match ('/-{1}[0-9]+$/', $slug )){
+                    $slug .= '-' . ++$i;
+                }
+                else{
+                    $slug = preg_replace ('/[0-9]+$/', ++$i, $slug );
+                }
+                $params [$field] = $slug;
+            }
+                return $slug;
+        }
+        
         
 
 }

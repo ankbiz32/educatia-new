@@ -3,7 +3,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?=base_url('Admin')?>" class="brand-link ml-1">
-      <span class="brand-text text-lg"><img src="<?=base_url('assets/images/logo_adm.png')?>" alt="Logo" height="25px" class=""> <strong class="ml-2">Admin </strong>Panel</span>
+      <span class="brand-text text-lg text-white"><img src="<?=base_url('assets/images/logo_adm.png')?>" alt="Logo" height="25px" class=""> <strong class="ml-2 text-white">Admin </strong>Panel</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -21,28 +21,49 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="<?=base_url('Admin')?>" class="nav-link <?php if($this->uri->segment(1)=="Admin" AND $this->uri->segment(2)=="" AND $this->uri->segment(3)==""){echo ' CustomActive';}?> >">
+            <a href="<?=base_url('Admin')?>" class="nav-link <?php if($this->uri->segment(1)=="Admin" AND $this->uri->segment(2)==""){echo ' CustomActive';}?> >">
               <i class="fas fa-columns nav-icon"></i>
               <p>Dashboard</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="<?=base_url('Admin/AdBanners')?>" class="nav-link <?php if($this->uri->segment(2)=="AdBanners"){echo ' CustomActive';}?>">
-              <i class="far fa-border nav-icon"></i>
-              <p>Ad Banners</p>
+            <a href="<?=base_url('Admin/Banners')?>" class="nav-link <?php if($this->uri->segment(2)=="Banners"){echo ' CustomActive';}?>">
+              <i class="far fa-film nav-icon"></i>
+              <p>Banners</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="<?=base_url('Admin/KnowUs')?>" class="nav-link <?php if($this->uri->segment(2)=="KnowUs"){echo ' CustomActive';}?>">
-              <i class="far fa-address-card nav-icon"></i>
-              <p>Know Us</p>
+         
+
+          <li class="nav-item has-treeview <?php if($this->uri->segment(2)=="Courses" OR $this->uri->segment(2)=="Categories"){echo ' menu-open';}?>">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Courses
+                <i class="right fas fa-angle-down"></i>
+              </p>
             </a>
+            <ul class="nav nav-treeview ml-3">
+              <li class="nav-item">
+                <a href="<?= base_url('Admin/Categories')?>" class="nav-link <?php if($this->uri->segment(2)=="Categories"){echo ' CustomActive';}?>">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p>Categories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('Admin/Courses')?>" class="nav-link <?php if($this->uri->segment(2)=="Courses"){echo ' CustomActive';}?>">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p class=''>Courses</p>
+                </a>
+              </li>
+            </ul>
           </li>
+
+
           <li class="nav-item">
             <a href="<?=base_url('Admin/Events')?>" class="nav-link <?php if($this->uri->segment(2)=="Events"){echo ' CustomActive';}?>">
-              <i class="far fa-calendar-plus nav-icon"></i>
-              <p>Events</p>
+              <i class="far fa-bullhorn nav-icon"></i>
+              <p>News & Events</p>
             </a>
           </li>
           <li class="nav-item">
@@ -55,6 +76,12 @@
             <a href="<?=base_url('Admin/Gallery')?>" class="nav-link <?php if($this->uri->segment(2)=="Gallery"){echo ' CustomActive';}?>">
               <i class="fa fa-image nav-icon"></i>
               <p>Gallery</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?=base_url('Admin/Partners')?>" class="nav-link <?php if($this->uri->segment(2)=="Partners"){echo ' CustomActive';}?>">
+              <i class="fa fa-users nav-icon"></i>
+              <p>Partners</p>
             </a>
           </li>
           <li class="nav-item">
@@ -85,8 +112,8 @@
                   <p class='text-muted'>Catering Gallery</p>
                 </a>
               </li>
-            </ul> -->
-          </li>
+            </ul>
+          </li> -->
 
           <li class="nav-item mt-4" id="website-link">
             <a href="<?=base_url()?>" target=_blank class="nav-link">

@@ -14,6 +14,18 @@ public function deleteInfo($id, $table)
     }
 }
 
+public function deleteInfoCol($col,$id, $table)
+{
+    $this->db->where($col,$id);
+    $del=$this->db->delete($table);
+    if($del){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 
 
 }

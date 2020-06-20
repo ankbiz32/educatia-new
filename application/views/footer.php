@@ -1,4 +1,4 @@
-<section class="testimonials-one  ">
+        <section class="testimonials-one  ">
             <div class="container">
                 <div class="block-title text-center">
                     <h2 class="block-title__title">What our students <br>
@@ -35,8 +35,8 @@
                     </div><!-- /.col-lg-6 -->
                     <div class="col-lg-6 d-flex">
                         <div class="my-auto">
-                            <form action="#" class="mailchimp-one__form mc-form" data-url="MAILCHIMP_FORM_URL">
-                                <input type="text" id="mc-email" placeholder="Enter your email ">
+                            <form action="<?=base_url('Home/Subscribe')?>" method="POST" class="mailchimp-one__form">
+                                <input type="text" id="mc-email" name="email" placeholder="Enter your email " required>
                                 <button type="submit" class="thm-btn">Subscribe</button>
                             </form><!-- /.mailchimp-one__form -->
                             <div class="mc-form__response"></div><!-- /.mc-form__response -->
@@ -67,11 +67,14 @@
                                     Get free courses
                                 </h2><!-- /.become-teacher__form-title -->
                             </div><!-- /.become-teacher__top -->
-                            <form action="<?=base_url()?>assets/inc/sendemail.php" class="become-teacher__form-content contact-form-validated">
-                                <input type="text" placeholder="Your Name" name="name">
-                                <input type="text" placeholder="Email Address" name="email">
-                                <input type="text" placeholder="Phone Number" name="phone">
-                                <input type="text" placeholder="Comment" name="message">
+                            <form action="<?=base_url('Home/Mail/Enquiry')?>" method="POST" class="become-teacher__form-content contact-form-validated">
+                                <input type="text" maxlength="20" name="name" id="name" x-moz-errormessage="Enter name here" oninvalid="this.setCustomValidity('Enter name here')" oninput="this.setCustomValidity('')" class="" placeholder="Your Name" required>
+
+                                <input type="email" placeholder="Email Address" name="email" class="" required>
+
+                                <input type="text" x-moz-errormessage="Enter Contact no. here"  name="phone" pattern="[6-9]{1}[0-9]{9}" oninvalid="this.setCustomValidity('')" oninput="this.setCustomValidity('')" maxlength="10" title="Enter 10 digit mobile no. starting with 6,7,8, or 9" class="" placeholder="Phone no.">
+
+                                <input type="text" placeholder="Comment" maxlength="200" name="message">
                                 <button type="submit" class="thm-btn become-teacher__form-btn">Apply For It</button>
                             </form><!-- /.become-teacher__form-content -->
                             <div class="result text-center"></div><!-- /.result -->
@@ -167,10 +170,13 @@
         </div><!-- /.search-popup__overlay -->
         <div class="search-popup__inner">
             
-            <form action="<?=base_url()?>assets/inc/sendemail.php" class="become-teacher__form-content contact-form-validated search-popup__form">
-                <input type="text" placeholder="Your Name" name="name" class="bg-gray mb-3">
-                <input type="text" placeholder="Email Address" name="email" class="bg-gray mb-3">
-                <input type="text" placeholder="Phone Number" name="phone" class="bg-gray">
+            <form action="<?=base_url('Home/Mail/Enroll')?>" method="POST" class="become-teacher__form-content contact-form-validated search-popup__form">
+                <input type="text" maxlength="20" name="name" id="name" x-moz-errormessage="Enter name here" oninvalid="this.setCustomValidity('Enter name here')" oninput="this.setCustomValidity('')" class="bg-gray mb-3" placeholder="Your Name" required>
+
+                <input type="email" placeholder="Email Address" name="email" class="bg-gray mb-3" required>
+
+                <input type="text" x-moz-errormessage="Enter Contact no. here"  name="phone" pattern="[6-9]{1}[0-9]{9}" oninvalid="this.setCustomValidity('')" oninput="this.setCustomValidity('')" maxlength="10" title="Enter 10 digit mobile no. starting with 6,7,8, or 9" class="bg-gray" placeholder="Phone no." required>
+
                 <button type="submit" class="thm-btn become-teacher__form-btn d-block mt-4 px-3 py-2">Enroll now</button>
             </form><!-- /.become-teacher__form-content -->
         </div><!-- /.search-popup__inner -->
@@ -192,6 +198,31 @@
 
     <!-- template scripts -->
     <script src="<?=base_url()?>assets/js/theme.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+        //  Sweet alert for normal response
+        var base_url = '<?=base_url()?>';
+        $(document).ready(function(){
+            const Toast = Swal.mixin({
+                showConfirmButton: true,
+                timer: 50000
+            });
+
+            <?php if($this->session->flashdata('success') || $message = $this->session->flashdata('failed')):
+                $class = $this->session->flashdata('success') ? 'success' : 'error';
+            ?>
+                
+                Toast.fire({
+                    icon: '<?=$class?>',
+                    title: '<?= $this->session->flashdata('success'); ?>
+                            <?= $this->session->flashdata('failed'); ?>'
+                });
+            <?php 
+                endif;
+            ?>
+        });
+
+    </script>
 </body>
 
 </html>

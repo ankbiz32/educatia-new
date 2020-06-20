@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-3">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"><i class="fa fa-globe"></i>&nbsp; Digi Kraft Social web profile:</h1>
+            <h1 class="m-0 text-dark"><i class="fa fa-globe"></i>&nbsp; Educatia web profile:</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?=base_url('Admin')?>">Home</a></li>
-              <li class="breadcrumb-item active">Digi Kraft profile</li>
+              <li class="breadcrumb-item active">Educatia profile</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

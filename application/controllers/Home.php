@@ -214,4 +214,82 @@ class Home extends MY_Controller {
 		$this->load->view('policies');
 		$this->load->view('footer');
 	}
+
+	
+	public function Mail($for)
+	{ 
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('name', 'Name', 'required');
+		if($this->form_validation->run() == true){
+			$name=$this->input->post('name');
+			$phone=$this->input->post('phone');
+			$message=$this->input->post('message');
+			$guest_email=$this->input->post('email');
+			
+			$mail_arr = $this->fetch->getWebProfile();
+			$landing_mail = $mail_arr->email;
+			
+			$to=$landing_mail;
+			$msg ="You have a new enquiry from- \n\r Name:".$name.".\n\r Phone:".$phone."\n\r E-mail:".$guest_email."\n\r Purpose:".$message;
+			$subject = "Educatia - New Enquiry";
+			$headers = "From:" . $name;
+
+			mail($to, $subject, $msg, $headers);
+			
+			$this->load->model('AddModel','save');
+			$data=$this->input->post();
+			$data['date']=date('Y-m-d');
+			$data['purpose']=$for;
+			$status= $this->save->saveEnquiry($data);
+
+			if($status){
+				$this->session->set_flashdata('success','Mail Sent!  We will connect with you soon.' );
+				redirect('Home');
+			}
+			else{
+				$this->session->set_flashdata('failed','Error sending mail !');
+				redirect('Home');
+			}
+		}
+		else{
+			$err=trim(strip_tags(validation_errors()));
+			$this->session->set_flashdata('failed',$err);
+			redirect('Home');
+		}
+	}
+
+	public function Subscribe()
+	{
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		if($this->form_validation->run() == true){
+			$guest_email=$this->input->post('email');
+			
+			$mail_arr = $this->fetch->getWebProfile();
+			$landing_mail = $mail_arr->email;
+			
+			$to=$landing_mail;
+			$msg ="You have a new Subscription from- \n\r E-mail:".$guest_email;
+			$subject = "Educatia- New Subscription";
+			$headers = "From:" . $guest_email;
+			mail($to, $subject, $msg, $headers);
+			$this->load->model('AddModel','save');
+			$data=$this->input->post();
+			$data['date']=date('Y-m-d');
+			$status= $this->save->saveInfo($data, 'subscriptions');
+			if($status){
+				$this->session->set_flashdata('success','Subscribed !' );
+				redirect('Home');
+			}
+			else{
+				$this->session->set_flashdata('failed','Error !');
+				redirect('Home');
+			}
+		}
+		else{
+			$err=trim(strip_tags(validation_errors()));
+			$this->session->set_flashdata('failed',$err);
+			redirect('Home');
+		}
+	}
+
 }

@@ -15,6 +15,19 @@ class EditModel extends CI_Model{
         }
     }
 
+    // Update Info
+    public function updateInfoByCol($data,$col, $id, $table)
+    {
+        $this->db->where($col, $id);
+        $wpflag = $this->db->update($table , $data);
+        if($wpflag){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
    // Update Website Profile
    public function updateWebProfile($data)
    {

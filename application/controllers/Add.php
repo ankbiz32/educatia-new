@@ -10,6 +10,48 @@ class Add extends MY_Controller {
                 $this->load->model('GetModel','fetch');
         }
 
+        public function Banner()
+        {
+            $this->form_validation->set_rules('tagline', 'Tagline', 'required');
+            $this->form_validation->set_rules('head', 'Description', 'required');
+            if($this->form_validation->run() == true){
+                $path ='assets/images';
+                $initialize = array(
+                    "upload_path" => $path,
+                    "allowed_types" => "jpg|jpeg|png|bmp|webp|gif",
+                    "remove_spaces" => TRUE,
+                    "max_size" => 1100
+                );
+                $this->load->library('upload', $initialize);
+                if (!$this->upload->do_upload('img')) {
+                    $this->session->set_flashdata('failed',strip_tags($this->upload->display_errors()) );
+                    redirect('Admin/Banners');
+                }
+                else {
+                    $imgdata = $this->upload->data();
+                    $imagename = $imgdata['file_name'];
+                    $data=array('tagline'=>$this->input->post('tagline'),
+                            'head'=>$this->input->post('head'),
+                            'img_src'=>$imagename
+                            );
+                    $status= $this->save->saveInfo($data, 'banners');
+
+                    if($status){
+                        $this->session->set_flashdata('success','New Banner added !' );
+                        redirect('Admin/Banners');
+                    }
+                    else{
+                        $this->session->set_flashdata('failed','Error !');
+                        redirect('Admin/Banners');
+                    }
+                } 
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('Admin/Banners');
+            } 
+        }
+
         public function Event()
         {
             $this->form_validation->set_rules('heading', 'Heading', 'required');
@@ -32,12 +74,15 @@ class Add extends MY_Controller {
                     $imagename = $imgdata['file_name'];
                     $data=array('heading'=>$this->input->post('heading'),
                             'descr'=>$this->input->post('descr'),
+                            'date'=>date('Y-m-d'),
+                            'slug'=>$this->generate_url_slug($this->input->post('heading'),'events'),
+                            'author'=>'Admin',
                             'img_src'=>$imagename
                             );
                     $status= $this->save->saveInfo($data, 'events');
 
                     if($status){
-                        $this->session->set_flashdata('success','New Event added !' );
+                        $this->session->set_flashdata('success','Added !' );
                         redirect('Admin/Events');
                     }
                     else{
@@ -49,6 +94,54 @@ class Add extends MY_Controller {
             else{
                 $this->session->set_flashdata('failed','Error !');
                 redirect('Admin/Events');
+            } 
+        }
+
+        public function Course()
+        {
+            $this->form_validation->set_rules('name', 'Course name', 'required');
+            $this->form_validation->set_rules('overview', 'Overview', 'required');
+            $this->form_validation->set_rules('old_price', 'old price', 'required');
+            $this->form_validation->set_rules('new_price', 'new price', 'required');
+            $this->form_validation->set_rules('cat_id', 'Category', 'required');
+            $this->form_validation->set_rules('lang', 'Language', 'required');
+            $this->form_validation->set_rules('rating', 'Rating', 'required');
+            $this->form_validation->set_rules('level', 'Skill level', 'required');
+            if($this->form_validation->run() == true){
+                $path ='assets/images';
+                $initialize = array(
+                    "upload_path" => $path,
+                    "allowed_types" => "jpg|jpeg|png|bmp|webp|gif",
+                    "remove_spaces" => TRUE,
+                    "max_size" => 1100
+                );
+                $this->load->library('upload', $initialize);
+                if (!$this->upload->do_upload('img')) {
+                    $this->session->set_flashdata('failed',strip_tags($this->upload->display_errors()) );
+                    redirect('Admin/Courses');
+                }
+                else {
+                    $imgdata = $this->upload->data();
+                    $imagename = $imgdata['file_name'];
+                    $data=$this->input->post();
+                    $data['img_src']=$imagename;
+                    $data['slug']=$this->generate_url_slug($this->input->post('name'),'courses');
+                    $status= $this->save->saveInfo($data, 'courses');
+
+                    if($status){
+                        $this->session->set_flashdata('success','Added !' );
+                        redirect('Admin/Courses');
+                    }
+                    else{
+                        $this->session->set_flashdata('failed','Error !');
+                        redirect('Admin/Courses');
+                    }
+                } 
+            }
+            else{
+                $err=trim(strip_tags(validation_errors()));
+                $this->session->set_flashdata('failed',$err);
+                redirect('Admin/Courses');
             } 
         }
 
@@ -94,6 +187,31 @@ class Add extends MY_Controller {
             } 
         }
 
+        public function Category()
+        {
+            $this->form_validation->set_rules('cat_name', 'Name', 'required');
+            $this->form_validation->set_rules('cat_color', 'Color', 'required');
+            $this->form_validation->set_rules('cat_img_src', 'Icon', 'required');
+            if($this->form_validation->run() == true){
+                $data=$this->input->post();
+                $status= $this->save->saveInfo($data, 'categories');
+
+                if($status){
+                    $this->session->set_flashdata('success','New Category added !' );
+                    redirect('Admin/Categories');
+                }
+                else{
+                    $this->session->set_flashdata('failed','Error !');
+                    redirect('Admin/Categories');
+                }
+                
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('Admin/Categories');
+            } 
+        }
+
         public function Gallery()
         {
             if($_FILES['img']['name']!=null){
@@ -131,203 +249,65 @@ class Add extends MY_Controller {
             } 
         }
 
-
-        public function Mail()
+        public function Partner()
         {
-            $name=$this->input->post('name');
-            $phone=$this->input->post('phone');
-            $message=$this->input->post('message');
-            $guest_email=$this->input->post('email');
-            
-            $mail_arr = $this->fetch->getWebProfile();
-            $landing_mail = $mail_arr->email;
-            
-            $to=$landing_mail;
-            $msg ="You have a new qnquiry from- \n\r Name:".$name.".\n\r Phone:".$phone."\n\r E-mail:".$guest_email."\n\r Purpose:".$message;
-            $subject = "DigiKraft Social - New Enquiry";
-            $headers = "From:" . $name;
-
-            mail($to, $subject, $msg, $headers);
-            
-            $data=$this->input->post();
-            $data['date']=date('Y-m-d');
-            $status= $this->save->saveEnquiry($data);
-
-            if($status){
-                $this->session->set_flashdata('success','Mail Sent!  We will connect with you soon.' );
-                redirect('Contact');
-            }
-            else{
-                $this->session->set_flashdata('failed','Error sending mail !');
-                redirect('Contact');
-            }
-        }
-
-        public function Subscribe()
-        {
-            $guest_email=$this->input->post('email');
-            
-            $mail_arr = $this->fetch->getWebProfile();
-            $landing_mail = $mail_arr->email;
-            
-            $to=$landing_mail;
-            $msg ="You have a new Subscription from- \n\r E-mail:".$guest_email;
-            $subject = "DigiKraft Social - New Subscription";
-            $headers = "From:" . $guest_email;
-
-            if(mail($to, $subject, $msg, $headers)){
-                $this->session->set_flashdata('success','Subscribed !' );
-                redirect('Home');
-            }
-            else{
-                $this->session->set_flashdata('failed','Error !');
-                redirect('Home');
-            }
-        }
-
-
-// --------------------------------------------------------- //
-
-        public function Career()
-        {
-            $data=$this->input->post();
-            $status= $this->save->saveCareer($data);
-
-            if($status){
-                $this->session->set_flashdata('success','New Career added !' );
-                redirect('Admin/Careers');
-            }
-            else{
-                $this->session->set_flashdata('failed','Error !');
-                redirect('Admin/Careers');
-            }
-        }
-
-        public function Application()
-        {
-            $this->form_validation->set_rules('name', 'Name', 'required');
-            $this->form_validation->set_rules('email', 'E-mail ID', 'required');
-            $this->form_validation->set_rules('for_position', 'Position', 'required');
-            if($this->form_validation->run() == true){
-                $data=$this->input->post();
-
-                $path ='assets/resumes/';
+            if($_FILES['img']['name']!=null){
+                $path ='assets/images';
                 $initialize = array(
                     "upload_path" => $path,
-                    "allowed_types" => "pdf|doc|docx",
-                    "remove_spaces" => TRUE
+                    "allowed_types" => "jpg|jpeg|png|bmp|webp",
+                    "remove_spaces" => TRUE,
+                    "max_size" => 350
                 );
                 $this->load->library('upload', $initialize);
-                if (!$this->upload->do_upload('resume')) {
-                    $newstr=str_replace('<p>','',$this->upload->display_errors());
-                    $err_str=str_replace('</p>','',$newstr);
-                    $this->session->set_flashdata('failed',str_replace('<p>','',$err_str));
-                    redirect('Career');
-                } 
+                if (!$this->upload->do_upload('img')) {
+                    $this->session->set_flashdata('failed',strip_tags($this->upload->display_errors()) );
+                    redirect('Admin/Partners');
+                }
                 else {
-                    $docdata = $this->upload->data();
-                    $docname = $docdata['file_name'];
-                    $data['resume']=$docname;
-                    $data['date']=date('Y-m-d');
-
-                    $status= $this->save->saveApplication($data);
+                    $imgdata = $this->upload->data();
+                    $imagename = $imgdata['file_name'];
+                    $data=array('img_src'=>$imagename);
+                    $status= $this->save->saveInfo($data, 'partners');
 
                     if($status){
-                        $name=$data['name'];
-                        $guest_email=$data['email'];
-                        $position=$data['for_position'];
-                        $mail_arr = $this->fetch->getWebProfile();
-                        $to = $mail_arr->email;
-
-                        $msg ="You have a new job application from- \n\r Name:".$name.".\n\r E-mail:".$guest_email."\n\r Applied for:".$position;
-                        $subject = "DigiKraft Social - New job application";
-                        $headers = "From:" . $name;
-
-                        mail($to, $subject, $msg, $headers);
-                        $this->session->set_flashdata('success','You have successfully applied for the job !' );
-                        redirect('Career');
+                        $this->session->set_flashdata('success','New Image added !' );
+                        redirect('Admin/Partners');
                     }
                     else{
                         $this->session->set_flashdata('failed','Error !');
-                        redirect('Career');
+                        redirect('Admin/Partners');
                     }
-                }
+                } 
             }
             else{
-                $profile=$this->fetch->getWebProfile();
-                $careers=$this->fetch->getCareers();
-                $this->load->view('header',['profile'=>$profile,
-                                            'careers'=>$careers,
-                                            'form_data'=>$this->input->post(),
-                                            'errors' => validation_errors()
-                                            ] );
-                $this->load->view('career');
-                $this->load->view('footer');
-            }
-        }
-
-        public function Blog()
-        {
-            // Image upload and saving name
-            $path ='assets/images';
-            $initialize = array(
-                "upload_path" => $path,
-                "allowed_types" => "jpg|jpeg|png|bmp|webp|gif",
-                "remove_spaces" => TRUE
-            );
-            $this->load->library('upload', $initialize);
-            if (!$this->upload->do_upload('img')) {
-                $this->session->set_flashdata('failed',$this->upload->display_errors());
-            } else {
-                $imgdata = $this->upload->data();
-                $imagename = $imgdata['file_name'];
+                $this->session->set_flashdata('failed','No image selected !');
+                redirect('Admin/Partners');
             } 
-
-            // searcing if author exists  & adding if it does not exist
-            $author_string=$this->input->post('author');
-            $author_exists=$this->fetch->search_string($author_string, 'blog_authors', 'author');
-            if($author_exists){
-                $author_id=$this->fetch->get_string_id($author_string, 'blog_authors', 'author');
-            }
-            else{
-                $this->save->saveString($author_string, 'blog_authors', 'author');
-                $author_id=$this->fetch->get_string_id($author_string, 'blog_authors', 'author');
-            }
-
-            // searcing if category exists  & adding if it does not exist
-            $catg_string=$this->input->post('category');
-            $catg_exists=$this->fetch->search_string($catg_string, 'blog_categories', 'category');
-            if($catg_exists){
-                $catg_id=$this->fetch->get_string_id($catg_string, 'blog_categories', 'category');
-            }
-            else{
-                $this->save->saveString($catg_string, 'blog_categories', 'category');
-                $catg_id=$this->fetch->get_string_id($catg_string, 'blog_categories', 'category');
-            }
-
-
-            $feat='0';
-            if($this->input->post('featured')!=null){
-                $feat='1';
-            }
-            $data=array('heading'=>$this->input->post('heading'),
-                        'content'=>$this->input->post('content'),
-                        'date'=>date('Y-m-d'),
-                        'img'=>$imagename,
-                        'featured'=>$feat,
-                        'authors_id'=>$author_id,
-                        'categories_id'=>$catg_id
-                        );
-            $status= $this->save->saveBlog($data);
-
-            if($status){
-                $this->session->set_flashdata('success','New Blog posted !' );
-                redirect('Admin/Blog');
-            }
-            else{
-                $this->session->set_flashdata('failed','Error !');
-                redirect('Admin/Blog');
-            }
         }
+
+        function generate_url_slug($string,$table,$field='slug',$key=NULL,$value=NULL){
+            $t =& get_instance();
+            $slug = url_title($string);
+            $slug = strtolower($slug);
+            $i = 0;
+            $params = array ();
+            $params[$field] = $slug;
+            if($key)$params["$key !="] = $value; 
+            while ($t->db->where($params)->get($table)->num_rows())
+            {
+                if (!preg_match ('/-{1}[0-9]+$/', $slug )){
+                    $slug .= '-' . ++$i;
+                }
+                else{
+                    $slug = preg_replace ('/[0-9]+$/', ++$i, $slug );
+                }
+                $params [$field] = $slug;
+            }
+                return $slug;
+        }
+        
+
+
 
 }
